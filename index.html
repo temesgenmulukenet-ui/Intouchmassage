@@ -401,66 +401,70 @@
   <p class="section-eyebrow">Online booking</p>
   <p class="section-title">Reserve your visit</p>
 
-  <div class="booking-grid">
-    <div class="form-group">
-      <label class="form-label">Full name</label>
-      <input class="form-input" type="text" id="inp-name" placeholder="Your name" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Phone number</label>
-      <input class="form-input" type="tel" id="inp-phone" placeholder="+1 000 000 0000" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email address</label>
-      <input class="form-input" type="email" id="inp-email" placeholder="you@example.com" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Service</label>
-      <select class="form-input" id="inp-service" onchange="updateSummary()">
-        <option value="">Select a service</option>
-        <option value="Swedish Massage — $75">Swedish Massage — $75</option>
-        <option value="Deep Tissue — $90">Deep Tissue — $90</option>
-        <option value="Hot Stone — $110">Hot Stone — $110</option>
-        <option value="Aromatherapy — $85">Aromatherapy — $85</option>
-        <option value="Prenatal — $80">Prenatal — $80</option>
-        <option value="Couple's Massage — $150">Couple's Massage — $150</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Preferred date</label>
-      <input class="form-input" type="date" id="inp-date" onchange="updateSummary()" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Duration</label>
-      <select class="form-input" id="inp-duration">
-        <option>60 minutes</option>
-        <option>75 minutes</option>
-        <option>90 minutes</option>
-      </select>
-    </div>
-    <div class="form-group full">
-      <label class="form-label">Select a time slot</label>
-      <div class="time-slots" id="slots">
-        <div class="time-slot" onclick="pickSlot(this)">9:00 AM</div>
-        <div class="time-slot" onclick="pickSlot(this)">10:00 AM</div>
-        <div class="time-slot" onclick="pickSlot(this)">11:00 AM</div>
-        <div class="time-slot" onclick="pickSlot(this)">1:00 PM</div>
-        <div class="time-slot" onclick="pickSlot(this)">2:00 PM</div>
-        <div class="time-slot" onclick="pickSlot(this)">3:00 PM</div>
-        <div class="time-slot" onclick="pickSlot(this)">4:00 PM</div>
-        <div class="time-slot" onclick="pickSlot(this)">5:00 PM</div>
+  <form id="booking-form" method="POST" action="https://formspree.io/f/xyzpqrst" style="max-width: 720px;">
+    <div class="booking-grid">
+      <div class="form-group">
+        <label class="form-label">Full name</label>
+        <input class="form-input" type="text" name="name" id="inp-name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone number</label>
+        <input class="form-input" type="tel" name="phone" id="inp-phone" placeholder="+1 000 000 0000" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input class="form-input" type="email" name="email" id="inp-email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service</label>
+        <select class="form-input" name="service" id="inp-service" onchange="updateSummary()" required>
+          <option value="">Select a service</option>
+          <option value="Swedish Massage — $75">Swedish Massage — $75</option>
+          <option value="Deep Tissue — $90">Deep Tissue — $90</option>
+          <option value="Hot Stone — $110">Hot Stone — $110</option>
+          <option value="Aromatherapy — $85">Aromatherapy — $85</option>
+          <option value="Prenatal — $80">Prenatal — $80</option>
+          <option value="Couple's Massage — $150">Couple's Massage — $150</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred date</label>
+        <input class="form-input" type="date" name="date" id="inp-date" onchange="updateSummary()" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration</label>
+        <select class="form-input" name="duration" id="inp-duration" required>
+          <option>60 minutes</option>
+          <option>75 minutes</option>
+          <option>90 minutes</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Select a time slot</label>
+        <div class="time-slots" id="slots">
+          <div class="time-slot" onclick="pickSlot(this)">9:00 AM</div>
+          <div class="time-slot" onclick="pickSlot(this)">10:00 AM</div>
+          <div class="time-slot" onclick="pickSlot(this)">11:00 AM</div>
+          <div class="time-slot" onclick="pickSlot(this)">1:00 PM</div>
+          <div class="time-slot" onclick="pickSlot(this)">2:00 PM</div>
+          <div class="time-slot" onclick="pickSlot(this)">3:00 PM</div>
+          <div class="time-slot" onclick="pickSlot(this)">4:00 PM</div>
+          <div class="time-slot" onclick="pickSlot(this)">5:00 PM</div>
+        </div>
+        <input type="hidden" name="time_slot" id="hidden-slot" required />
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Special notes (optional)</label>
+        <textarea class="form-input" name="special_notes" id="inp-notes" rows="3" placeholder="Allergies, problem areas, or any other requests…"></textarea>
       </div>
     </div>
-    <div class="form-group full">
-      <label class="form-label">Special notes (optional)</label>
-      <textarea class="form-input" id="inp-notes" rows="3" placeholder="Allergies, problem areas, or any other requests…"></textarea>
-    </div>
-  </div>
 
-  <div class="booking-confirm">
-    <div class="booking-summary" id="summary">Select a service, date, and time to continue.</div>
-    <button class="btn-primary" onclick="submitBooking()">Confirm Booking</button>
-  </div>
+    <div class="booking-confirm">
+      <div class="booking-summary" id="summary">Select a service, date, and time to continue.</div>
+      <button type="submit" class="btn-primary" id="submit-btn">Confirm Booking</button>
+    </div>
+  </form>
+
   <div class="success-msg" id="success-msg">
     <strong>Booking confirmed!</strong> We've received your request and will send a confirmation to your email shortly.
   </div>
@@ -496,6 +500,7 @@
     document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
     el.classList.add('selected');
     selectedSlot = el.textContent;
+    document.getElementById('hidden-slot').value = selectedSlot;
     updateSummary();
   }
 
@@ -524,19 +529,12 @@
     }
   }
 
-  function submitBooking() {
-    const name = document.getElementById('inp-name').value.trim();
-    const email = document.getElementById('inp-email').value.trim();
-    const service = document.getElementById('inp-service').value;
-    const date = document.getElementById('inp-date').value;
-    if (!name || !email || !service || !date || !selectedSlot) {
-      alert('Please fill in your name, email, service, date, and a time slot.');
-      return;
+  document.getElementById('booking-form').addEventListener('submit', function(e) {
+    if (!selectedSlot) {
+      e.preventDefault();
+      alert('Please select a time slot.');
     }
-    const msg = document.getElementById('success-msg');
-    msg.style.display = 'block';
-    msg.scrollIntoView({ behavior: 'smooth' });
-  }
+  });
 </script>
 
 </body>
